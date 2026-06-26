@@ -1,0 +1,291 @@
+\documentclass{beamer}
+
+% --------------------
+% Theme and Packages
+% --------------------
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+% --------------------
+% Title Information
+% --------------------
+\title[Kiswahili Audio Intelligence Pipeline]
+{An End-to-End Kiswahili Audio Processing Pipeline for Speech Recognition, Sentiment Analysis, and Summarization}
+
+\author{Kevin Obote}
+\institute{
+Strathmore University \\ iLabAfrica \\
+\vspace{0.2cm}
+\textbf{Supervisor:} Dr. Betsy Muriithi
+}
+\date{\today}
+
+% --------------------
+% Begin Document
+% --------------------
+\begin{document}
+
+% --------------------
+% Title Slide
+% --------------------
+\begin{frame}
+\titlepage
+\end{frame}
+
+% --------------------
+% Outline
+% --------------------
+\begin{frame}{Presentation Outline}
+\tableofcontents
+\end{frame}
+
+% ==========================================================
+% CHAPTER 1: INTRODUCTION
+% ==========================================================
+\section{Chapter 1: Introduction}
+
+\begin{frame}{Background of the Study}
+Kiswahili is one of the most widely spoken African languages, yet remains underrepresented in speech and language technologies.
+\begin{itemize}
+    \item Growth in audio-based digital content
+    \item Dominance of high-resource languages in ASR systems
+    \item Limited end-to-end audio intelligence systems for Kiswahili
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Problem Statement}
+Despite advances in deep learning:
+\begin{itemize}
+    \item Kiswahili ASR systems exhibit high word error rates
+    \item Sentiment models perform poorly on neutral and factual speech
+    \item Summarization lacks reliable ground truth datasets
+\end{itemize}
+This limits the usability of Kiswahili audio analytics in real-world applications.
+\end{frame}
+
+\begin{frame}{Research Objectives}
+\textbf{Main Objective:}
+\begin{itemize}
+    \item To design and deploy an end-to-end Kiswahili audio processing pipeline
+\end{itemize}
+
+\textbf{Specific Objectives:}
+\begin{itemize}
+    \item Develop a Kiswahili ASR system
+    \item Perform sentiment analysis on speech transcripts
+    \item Generate abstractive summaries from spoken content
+    \item Deploy the system as a functional prototype
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Scope and Significance}
+\begin{itemize}
+    \item Focus on Kiswahili speech data
+    \item Offline batch audio processing
+    \item Contribution to low-resource language NLP research
+\end{itemize}
+\end{frame}
+
+% ==========================================================
+% CHAPTER 2: LITERATURE REVIEW
+% ==========================================================
+\section{Chapter 2: Literature Review}
+
+\begin{frame}{Automatic Speech Recognition for Low-Resource Languages}
+\begin{itemize}
+    \item HMM-GMM vs Transformer-based ASR
+    \item Wav2Vec2 and self-supervised learning
+    \item Challenges in African language datasets
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Sentiment Analysis and Speech}
+\begin{itemize}
+    \item Text-based sentiment dominance
+    \item Multilingual transformers
+    \item Limitations in neutral sentiment detection
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Abstractive Text Summarization}
+\begin{itemize}
+    \item Extractive vs Abstractive methods
+    \item T5 and mT5 architectures
+    \item Evaluation challenges using ROUGE
+\end{itemize}
+\end{frame}
+
+% ==========================================================
+% CHAPTER 3: METHODOLOGY
+% ==========================================================
+\section{Chapter 3: Methodology}
+
+\begin{frame}{Research Design}
+The study follows the CRISP-DM framework:
+\begin{enumerate}
+    \item Business Understanding
+    \item Data Understanding
+    \item Data Preparation
+    \item Modeling
+    \item Evaluation
+    \item Deployment
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{System Architecture}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/system_architecture.pdf}
+    \caption{Overall System Architecture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{End-to-End Processing Flow}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/processing_flow_diagram.pdf}
+    \caption{Audio Processing Flow Architecture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Data Sources and Preparation}
+\begin{itemize}
+    \item Mozilla Common Voice (Kiswahili subset)
+    \item Audio normalization and resampling
+    \item Text cleaning and chunking
+\end{itemize}
+\end{frame}
+
+% ==========================================================
+% CHAPTER 4: SYSTEM IMPLEMENTATION
+% ==========================================================
+\section{Chapter 4: System Implementation}
+
+\begin{frame}{ASR Model Implementation}
+\begin{itemize}
+    \item Wav2Vec2 fine-tuned for Kiswahili
+    \item Whisper used as a baseline
+    \item GPU and CPU optimized training
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Sentiment Analysis Implementation}
+\begin{itemize}
+    \item DistilBERT multilingual model
+    \item Labels: Positive, Neutral, Negative
+    \item Chunk-level sentiment aggregation
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Summarization Implementation}
+\begin{itemize}
+    \item T5-based abstractive summarization
+    \item Text chunking for long transcripts
+    \item Sentence-level summary merging
+\end{itemize}
+\end{frame}
+
+% ==========================================================
+% CHAPTER 5: RESULTS AND EVALUATION
+% ==========================================================
+\section{Chapter 5: Results and Evaluation}
+
+\begin{frame}{ASR Evaluation Metrics}
+\textbf{Word Error Rate (WER):}
+\[
+WER = \frac{S + D + I}{N}
+\]
+\end{frame}
+
+\begin{frame}{ASR Results}
+\begin{table}
+\centering
+\begin{tabular}{lc}
+\toprule
+Metric & Value \\
+\midrule
+Final Test WER & 0.2917 \\
+Best Validation WER & 0.1068 \\
+Average Sample WER & 0.1914 \\
+\bottomrule
+\end{tabular}
+\caption{ASR Performance Results}
+\end{table}
+\end{frame}
+
+\begin{frame}{Sentiment Analysis Results}
+\begin{table}
+\centering
+\begin{tabular}{lc}
+\toprule
+Metric & Score \\
+\midrule
+Precision & 0.015 \\
+Recall & 0.014 \\
+F1-score & 0.0144 \\
+\bottomrule
+\end{tabular}
+\caption{Sentiment Analysis Performance}
+\end{table}
+\end{frame}
+
+\begin{frame}{Summarization Results}
+\begin{table}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Model & ROUGE-1 & ROUGE-2 & ROUGE-L \\
+\midrule
+AfriTeVa V2 & 0.300 & 0.300 & 0.300 \\
+mT5 XLSum & \textbf{0.460} & \textbf{0.321} & \textbf{0.424} \\
+mt5-small & 0.300 & 0.300 & 0.300 \\
+\bottomrule
+\end{tabular}
+\caption{Summarization Evaluation Results}
+\end{table}
+\end{frame}
+
+% ==========================================================
+% CHAPTER 6: CONCLUSION AND FUTURE WORK
+% ==========================================================
+\section{Chapter 6: Conclusion and Future Work}
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+    \item Successfully developed an end-to-end Kiswahili audio pipeline
+    \item Demonstrated feasibility of low-resource speech intelligence
+    \item Deployment validates real-world applicability
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Limitations}
+\begin{itemize}
+    \item Limited labeled sentiment data
+    \item Evaluation constraints for summarization
+    \item High computational requirements
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Future Work}
+\begin{itemize}
+    \item Domain-specific fine-tuning
+    \item Improved evaluation methodologies
+    \item Mobile and offline deployment
+\end{itemize}
+\end{frame}
+
+% --------------------
+% Thank You
+% --------------------
+\begin{frame}
+\centering
+\Huge{Thank You}\\
+\vspace{0.5cm}
+\Large{Questions?}
+\end{frame}
+
+\end{document}
